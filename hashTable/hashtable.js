@@ -2,14 +2,15 @@ class HashTable{
   constructor(size){
       this.data = new Array(size);
   }
+  //hash function
   hashMethod(key){
       let hash = 0;
-      for(let i = 0; i < key.length;i++){
+      for(let i = 0; i < key.length; i++){
           hash = (hash + key.charCodeAt(i)*i) % this.data.length;
       }
       return hash;
   }
-  set(key, value) {
+  set(key, value) {  
     const address = this.hashMethod(key);
     if(!this.data[address]) {
       this.data[address] = [];
@@ -47,21 +48,19 @@ class HashTable{
     return false;
   }
   getKeys() {
-    let keys = [];
-    for(let i = 0; i < this.data.length; i++){
-      if(this.data[i]){
-        for(let j = 0; j < this.data[i].length; j++){
-          keys.push(this.data[i][j][0]);
-        }
-      }
-    }
-    return Keys;
+    const key = []
+    this.data.map(element => {
+      element.map((pairKey) => {
+        key.push(pairKey[0])
+      })
+    })
+    return key
   }
 }
+//50 buckets
 const myHashTable = new HashTable(50);
+
 myHashTable.set('Diego',1990);
 myHashTable.set('Mariana',1998);
 // myHashTable.delete('Diego');
 // myHashTable.delete('Mariana');
-debugger;
-myHashTable.getKeys()
